@@ -9,39 +9,18 @@ import java.util.Iterator;
 class Troco {
 
     protected PapelMoeda[] papeisMoeda;
-
+    private final int[] tiposMoeda = {100,50,20,10,5,2,1}; 
+    
     public Troco(int valor) {
-        papeisMoeda = new PapelMoeda[6];
-        int count = 0;
-        while (valor % 100 != 0) {
-            count++;
+        int p = 0;
+        int moeda;
+        while (valor != 0) {
+            moeda = tiposMoeda[p];
+            papeisMoeda[p] = new PapelMoeda(moeda, valor/moeda);
+            valor = valor%moeda;
+            p++;
         }
-        papeisMoeda[5] = new PapelMoeda(100, count);
-        count = 0;
-        while (valor % 50 != 0) {
-            count++;
-        }
-        papeisMoeda[4] = new PapelMoeda(50, count);
-        count = 0;
-        while (valor % 20 != 0) {
-            count++;
-        }
-        papeisMoeda[3] = new PapelMoeda(20, count);
-        count = 0;
-        while (valor % 10 != 0) {
-            count++;
-        }
-        papeisMoeda[2] = new PapelMoeda(10, count);
-        count = 0;
-        while (valor % 5 != 0) {
-            count++;
-        }
-        papeisMoeda[1] = new PapelMoeda(5, count);
-        count = 0;
-        while (valor % 2 != 0) {
-            count++;
-        }
-        papeisMoeda[1] = new PapelMoeda(2, count);
+        
     }
 
     public Iterator<PapelMoeda> getIterator() {
